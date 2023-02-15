@@ -18,6 +18,7 @@ f.rental_duration as rental_duration_day,
 r.rental_date as rental_date,
 r.rental_date as return_date,
 lower(s.first_name || ' ' || s.last_name) as staff_name,
+c.customer_id as customer_id,
 lower(c.first_name || ' ' || c.last_name) as customer_name,
 LOWER(co.country) as customer_country, 
 lower(ci.city) as customer_city,
@@ -33,6 +34,7 @@ left join inventory i on r.inventory_id = i.inventory_id
 left join film f on i.film_id = f.film_id 
 left join film_category fc on f.film_id = fc.film_id 
 left join category ca on fc.category_id = ca.category_id 
+where c.customer_id = 1;
 
 
 -- actors in films
@@ -56,7 +58,8 @@ select *
 from film;
 
 select *
-from customer c;
+from customer c
+where email like 'mary.smith%';
 
 select *
 from address a;
