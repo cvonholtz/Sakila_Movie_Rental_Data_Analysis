@@ -34,7 +34,7 @@ left join inventory i on r.inventory_id = i.inventory_id
 left join film f on i.film_id = f.film_id 
 left join film_category fc on f.film_id = fc.film_id 
 left join category ca on fc.category_id = ca.category_id 
-where c.customer_id = 1;
+
 
 
 -- actors in films
@@ -63,3 +63,34 @@ where email like 'mary.smith%';
 
 select *
 from address a;
+
+select f.film_id,
+a.actor_id 
+from film f 
+left join film_actor fa on f.film_id = fa.film_id 
+left join actor a on fa.actor_id  = a.actor_id
+---where f.film_id is null;
+
+select *
+from actor a
+where a.first_name like 'nic%' or a.last_name like 'cage';
+
+
+--- Rank sales by Genre
+SELECT 
+ca.name as film_category,
+round(sum(p.amount), 2) as rental_amount,
+RANK() OVER(ORDER BY sum(p.amount) DESC) Rank
+from rental r 
+left join payment p on r.rental_id = p.rental_id 
+left join staff s on p.staff_id = s.staff_id 
+left join customer c on r.customer_id = c.customer_id 
+left join address a on c.address_id = a.address_id 
+left join city ci on ci.city_id = a.city_id 
+left join country co on ci.country_id = co.country_id 
+left join inventory i on r.inventory_id = i.inventory_id 
+left join film f on i.film_id = f.film_id 
+left join film_category fc on f.film_id = fc.film_id 
+left join category ca on fc.category_id = ca.category_id 
+GROUP by ca.name
+ORDER by rental_amount desc;
