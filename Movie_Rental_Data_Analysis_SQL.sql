@@ -39,10 +39,13 @@ left join category ca on fc.category_id = ca.category_id
 
 -- actors in films
 select lower(a.first_name || ' ' || a.last_name) as actor_name,
-lower(f.title) as film
+a.actor_id,
+lower(f.title) as film,
+f.film_id
 from film f 
 left join film_actor fa on f.film_id = fa.film_id 
 left join actor a on fa.actor_id = a.actor_id 
+
 
 ---store locations
 select s.store_id,
@@ -94,3 +97,25 @@ left join film_category fc on f.film_id = fc.film_id
 left join category ca on fc.category_id = ca.category_id 
 GROUP by ca.name
 ORDER by rental_amount desc;
+
+
+with cte as(
+	select f.title as film_name,
+	c.name as film_category,
+	f.rental_duration as rental_duration,
+	f.'length' as film_length,
+	f.rating as film_rating,
+	(a.first_name || ' ' || a.last_name) as actor_name
+	from film f 
+	left join film_category fc on f.film_id = fc.film_id 
+	left join category c on fc.category_id = c.category_id 
+	left join film_actor fa on fa.film_id = f.film_id 
+	left join actor a on fa.actor_id = a.actor_id 
+)
+
+SELECT *
+from cte
+
+select *
+from actor a 
+
