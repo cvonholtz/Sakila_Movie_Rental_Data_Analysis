@@ -1,5 +1,5 @@
 Below is a link to the Tableau Public file for this project:
-https://public.tableau.com/app/profile/chad.vonholtz/viz/SakilaMovieRentalAnalysis/Time
+https://public.tableau.com/app/profile/chad.vonholtz/viz/SakilaMovieRentalAnalysis/SakilaMovieRentalAnalysis
 
 Data for this project relied on Kaggle's SQLite Sakila Sample Database 
 More information can be found here: https://www.kaggle.com/datasets/atanaskanev/sqlite-sakila-sample-database
